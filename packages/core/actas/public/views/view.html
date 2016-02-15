@@ -1,0 +1,14 @@
+<section data-ng-controller="ActasController" data-ng-init="findOne()">
+  <span>{{acta.created | date:'medium'}}</span> /
+  <span>{{acta.user.name}}</span>
+  <h2>{{acta.title}}</h2>
+  <div data-ng-if="hasAuthorization(acta)">
+    <a class="btn" href="/actas/{{acta._id}}/edit">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn" data-ng-click="remove(acta);">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <div>{{acta.content}}</div>
+</section>

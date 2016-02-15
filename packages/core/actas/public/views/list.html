@@ -1,0 +1,21 @@
+<section data-ng-controller="ActasController" data-ng-init="find()">
+  <ul class="actas unstyled">
+    <li data-ng-repeat="acta in actas">
+      <span>{{acta.created | date:'medium'}}</span> /
+      <span>{{acta.user.name}}</span>
+      <h2>
+        <a data-ng-href="/actas/{{acta._id}}">{{acta.title}}</a>
+        <span data-ng-if="hasAuthorization(acta)">
+          <a class="btn" href="/actas/{{acta._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+          </a>
+          <a class="btn" data-ng-click="remove(acta);">
+            <i class="glyphicon glyphicon-trash"></i>
+          </a>
+        </span>
+      </h2>
+      <div>{{acta.content}}</div>
+    </li>
+  </ul>
+  <h1 data-ng-hide="!actas || actas.length">No actas yet. <br> Why don't you <a href="/actas/create">Create One</a>?</h1>
+</section>
