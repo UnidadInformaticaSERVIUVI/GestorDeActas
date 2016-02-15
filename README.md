@@ -1,3 +1,3 @@
 # GestorDeActas
 
-NVALDES
+NVALDES--EDITADO
