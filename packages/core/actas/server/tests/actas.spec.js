@@ -32,6 +32,7 @@ describe('<Unit Test>', function() {
       user.save(function() {
         acta = new Acta({
           title: 'Acta Title',
+          place: 'Acta Place',
           content: 'Acta Content',
           user: user
         });
@@ -48,6 +49,7 @@ describe('<Unit Test>', function() {
         return acta.save(function(err, data) {
           expect(err).to.be(null);
           expect(data.title).to.equal('Acta Title');
+          expect(data.place).to.equal('Acta Place');
           expect(data.content).to.equal('Acta Content');
           expect(data.user.length).to.not.equal(0);
           expect(data.created.length).to.not.equal(0);
@@ -64,6 +66,16 @@ describe('<Unit Test>', function() {
           expect(err).to.not.be(null);
           done();
         });
+      });
+      
+      it('Should be able to show an error when try to save witout Place', function(done) {
+          this.timeout(10000);
+          acta.place= '';
+          
+          return acta.save(function(err){
+              expect(err).to.not.be(null);
+              done();
+          });
       });
 
       it('should be able to show an error when try to save without content', function(done) {

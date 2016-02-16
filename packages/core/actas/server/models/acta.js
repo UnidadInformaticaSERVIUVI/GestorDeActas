@@ -20,6 +20,11 @@ var ActaSchema = new Schema({
     required: true,
     trim: true
   },
+   place: {
+    type: String,
+    required: true,
+    trim: true
+  },
   content: {
     type: String,
     required: true,
@@ -44,6 +49,10 @@ var ActaSchema = new Schema({
 ActaSchema.path('title').validate(function(title) {
   return !!title;
 }, 'Title cannot be blank');
+
+ActaSchema.path('place').validate(function(place) {
+  return !!place;
+}, 'Place cannot be blank');
 
 ActaSchema.path('content').validate(function(content) {
   return !!content;
