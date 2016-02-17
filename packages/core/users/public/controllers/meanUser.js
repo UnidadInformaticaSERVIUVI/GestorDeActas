@@ -19,7 +19,7 @@ angular.module('mean.users')
   .controller('LoginCtrl', ['$rootScope', 'MeanUser',
     function($rootScope, MeanUser) {
       var vm = this;
-
+  
       // This object will be filled by the form
       vm.user = {};
       
@@ -44,6 +44,7 @@ angular.module('mean.users')
 
       // Register the login() function
       vm.login = function() {
+          
         MeanUser.login(this.user);
       };
     }

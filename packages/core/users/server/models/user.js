@@ -139,6 +139,10 @@ UserSchema.methods.isAdmin = function() {
  * @api public
  */
 UserSchema.methods.authenticate = function(plainText) {
+    console.log("*****Autenticando********");
+    console.log("Pass: "+ plainText);
+    console.log("thisPass: "+ this.hased_password);
+    
   return this.hashPassword(plainText) === this.hashed_password;
 };
 

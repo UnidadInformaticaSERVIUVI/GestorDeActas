@@ -120,6 +120,8 @@ angular.module('mean.users').factory('MeanUser', [ '$rootScope', '$http', '$loca
     var MeanUser = new MeanUserKlass();
 
     MeanUserKlass.prototype.login = function (user) {
+         
+         
       // this is an ugly hack due to mean-admin needs
       var destination = $location.path().indexOf('/login') === -1 ? $location.absUrl() : false;
       $http.post('/api/login', {
