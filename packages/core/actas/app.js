@@ -27,7 +27,7 @@ Actas.register(function(app, auth, database, circles, swagger) {
   });
   Actas.menus.add({
     'roles': ['authenticated'],
-    'title': 'Create New Acta',
+    'title': 'Crear Acta',
     'link': 'create acta'
   });
 

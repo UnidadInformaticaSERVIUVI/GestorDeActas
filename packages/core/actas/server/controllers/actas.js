@@ -29,6 +29,15 @@ module.exports = function(Actas) {
             var acta = new Acta(req.body);
             acta.user = req.user;
 
+
+/***************CREAR LISTA ASISTENTES******************* */
+         
+   acta.attendance = [{name :'Nombre 1' , appointment: 'Cargo 1', note :'Observacion 1'}];
+    console.log("*************************");
+    console.log(acta);
+    console.log("*************************");
+/***************************************************** */
+
             acta.save(function(err) {
                 if (err) {
                     return res.status(500).json({
