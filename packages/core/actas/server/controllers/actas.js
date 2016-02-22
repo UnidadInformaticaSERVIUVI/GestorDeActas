@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
+
 module.exports = function(Actas) {
 
     return {
@@ -22,21 +23,13 @@ module.exports = function(Actas) {
                 next();
             });
         },
+        
         /**
          * Create an acta
          */
         create: function(req, res) {
             var acta = new Acta(req.body);
             acta.user = req.user;
-
-
-/***************CREAR LISTA ASISTENTES******************* */
-         
-   acta.attendance = [{name :'Nombre 1' , appointment: 'Cargo 1', note :'Observacion 1'}];
-    console.log("*************************");
-    console.log(acta);
-    console.log("*************************");
-/***************************************************** */
 
             acta.save(function(err) {
                 if (err) {
@@ -119,6 +112,11 @@ module.exports = function(Actas) {
                 action: 'viewed',
                 user: {
                     name: req.user.name
+                },
+                attendance: {
+                    name: req.acta.attendance.name,
+                    appointment: req.acta.attendance.appointment,
+                    note: req.acta.attendance.appointment
                 },
                 name: req.acta.title,
                 url: config.hostname + '/actas/' + req.acta._id
