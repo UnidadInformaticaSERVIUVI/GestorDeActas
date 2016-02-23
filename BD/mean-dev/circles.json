@@ -1,0 +1,45 @@
+{
+	"_id" : ObjectId("56bcb47433824a776b228a5d"),
+	"name" : "authenticated",
+	"__v" : 0
+},
+{
+	"_id" : ObjectId("56bcb47433824a776b228a5e"),
+	"name" : "admin",
+	"__v" : 0
+},
+{
+	"_id" : ObjectId("56bcb47433824a776b228a5f"),
+	"name" : "can create content",
+	"circles" : [
+		[
+			"admin"
+		]
+	],
+	"__v" : 0
+},
+{
+	"_id" : ObjectId("56bcb47433824a776b228a60"),
+	"name" : "can edit content",
+	"circles" : [
+		[
+			"admin"
+		]
+	],
+	"__v" : 0
+},
+{
+	"_id" : ObjectId("56bcb47433824a776b228a61"),
+	"name" : "can delete content",
+	"circles" : [
+		[
+			"admin"
+		]
+	],
+	"__v" : 0
+},
+{
+	"_id" : ObjectId("56bcb47433824a776b228a62"),
+	"name" : "anonymous",
+	"__v" : 0
+}

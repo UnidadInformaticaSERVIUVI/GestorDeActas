@@ -1,0 +1,27 @@
+{
+	"_id" : ObjectId("56bcb1a22a1ccf8d06bfc3e9"),
+	"email" : "matiasparedes@me.com",
+	"hashed_password" : "OovB9D2GdBSnQ8+jjZMiyAsQe87bM5vEFu4bylgYLhesNT+2rMGXU8hB/rD3M/TM5qVyeqYhpSUeugHjU9HF1Q==",
+	"salt" : "5CEkI28r5mP8HpnCw5FBCQ==",
+	"name" : "Matías",
+	"username" : "matiasparedesf",
+	"provider" : "local",
+	"roles" : [
+		"authenticated",
+		"admin"
+	],
+	"__v" : 0
+},
+{
+	"_id" : ObjectId("56bcd8544e832156073ad352"),
+	"email" : "mras.drts@gmail.com",
+	"name" : "Emmanuel",
+	"username" : "Emma",
+	"hashed_password" : "KAg2OLP8yrzvrMvLzHZlVwShyd/uudrWiKxWcWpgGssEm6qzh/kek8xNLNpGAQCx+PMgqgeBp6wyLLC7GMLP3A==",
+	"salt" : "9/JQK2qIUyusga3Tr/0KHw==",
+	"provider" : "local",
+	"roles" : [
+		"authenticated"
+	],
+	"__v" : 0
+}
