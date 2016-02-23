@@ -20,6 +20,7 @@ module.exports = function(Actas) {
                 if (err) return next(err);
                 if (!acta) return next(new Error('Failed to load acta ' + id));
                 req.acta = acta;
+                req.acta.attendance=acta.attendance
                 next();
             });
         },
@@ -44,7 +45,12 @@ module.exports = function(Actas) {
                         name: req.user.name
                     },
                     url: config.hostname + '/actas/' + acta._id,
-                    name: acta.title
+                    name: acta.title,
+                     attendance: {
+                    name: req.acta.attendance.name,
+                    appointment: req.acta.attendance.appointment,
+                    note: req.acta.attendance.note
+                }
                 });
 
                 res.json(acta);
@@ -72,6 +78,11 @@ module.exports = function(Actas) {
                         name: req.user.name
                     },
                     name: acta.title,
+                     attendance: {
+                    name: req.acta.attendance.name,
+                    appointment: req.acta.attendance.appointment,
+                    note: req.acta.attendance.note
+                },
                     url: config.hostname + '/actas/' + acta._id
                 });
 
@@ -97,7 +108,12 @@ module.exports = function(Actas) {
                     user: {
                         name: req.user.name
                     },
-                    name: acta.title
+                    name: acta.title,
+                     attendance: {
+                    name: req.acta.attendance.name,
+                    appointment: req.acta.attendance.appointment,
+                    note: req.acta.attendance.note
+                }
                 });
 
                 res.json(acta);
@@ -107,18 +123,18 @@ module.exports = function(Actas) {
          * Show an acta
          */
         show: function(req, res) {
-
+            
             Actas.events.publish({
                 action: 'viewed',
                 user: {
                     name: req.user.name
                 },
+                name: req.acta.title,
                 attendance: {
                     name: req.acta.attendance.name,
                     appointment: req.acta.attendance.appointment,
-                    note: req.acta.attendance.appointment
+                    note: req.acta.attendance.note
                 },
-                name: req.acta.title,
                 url: config.hostname + '/actas/' + req.acta._id
             });
 
@@ -130,7 +146,7 @@ module.exports = function(Actas) {
         all: function(req, res) {
             var query = req.acl.query('Acta');
 
-            query.find({}).sort('-created').populate('user', 'name username').exec(function(err, actas) {
+            query.find({}).sort('+created').populate('user', 'name username').exec(function(err, actas) {
                 if (err) {
                     return res.status(500).json({
                         error: 'Cannot list the actas'
