@@ -22,12 +22,12 @@
     </div>
     
     <div class="form-group">
-        <label class="col-md-3 control-label">Asistentes</label>
+        <label class="col-md-3 control-label" mean-token="'create-attendance'">Asistentes</label>
          <div class="col-md-9">
              <div class="row">
-  <div class="col-xs-4"><input type="text" class="form-control" placeholder="Nombre"></div>
-  <div class="col-xs-3"><input type="text" class="form-control" placeholder="Cargo"></div>
-  <div class="col-xs-5"><input type="text" class="form-control" placeholder="Nota"></div>
+  <div class="col-xs-4"><input type="text" class="form-control" data-ng-model="attendance.name" id="name" placeholder="Nombre"></div>
+  <div class="col-xs-3"><input type="text" class="form-control" data-ng-model="attendance.appointment" id="appointment" placeholder="Cargo"></div>
+  <div class="col-xs-5"><input type="text" class="form-control" data-ng-model="attendance.note" id="note" placeholder="Nota"></div>
 </div>
          </div>
     </div> 
