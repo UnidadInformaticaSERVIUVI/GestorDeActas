@@ -12,6 +12,7 @@ var mongoose = require('mongoose'),
  */
 var AsistenteSchema = new Schema({
 
+
   name: {
     type: String,
     required: true,
