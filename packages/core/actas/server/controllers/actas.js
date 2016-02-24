@@ -115,7 +115,7 @@ module.exports = function(Actas) {
                 },
                 name: req.acta.title,
                 attendance: {
-                    id: req.attendace,
+                    id: req.attendance._id,
                     name: req.acta.attendance.name,
                     appointment: req.acta.attendance.appointment,
                     note: req.acta.attendance.note
