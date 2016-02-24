@@ -59,7 +59,7 @@ angular.module('mean.actas').controller('ActasController', ['$scope', '$statePar
         });
       }
     };
-
+    
     $scope.update = function(isValid) {
       if (isValid) {
         var acta = $scope.acta;

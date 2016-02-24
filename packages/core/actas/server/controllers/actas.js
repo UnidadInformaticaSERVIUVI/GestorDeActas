@@ -46,11 +46,6 @@ module.exports = function(Actas) {
                     },
                     url: config.hostname + '/actas/' + acta._id,
                     name: acta.title,
-                     attendance: {
-                    name: req.acta.attendance.name,
-                    appointment: req.acta.attendance.appointment,
-                    note: req.acta.attendance.note
-                }
                 });
 
                 res.json(acta);
@@ -77,12 +72,6 @@ module.exports = function(Actas) {
                     user: {
                         name: req.user.name
                     },
-                    name: acta.title,
-                     attendance: {
-                    name: req.acta.attendance.name,
-                    appointment: req.acta.attendance.appointment,
-                    note: req.acta.attendance.note
-                },
                     url: config.hostname + '/actas/' + acta._id
                 });
 
@@ -109,11 +98,6 @@ module.exports = function(Actas) {
                         name: req.user.name
                     },
                     name: acta.title,
-                     attendance: {
-                    name: req.acta.attendance.name,
-                    appointment: req.acta.attendance.appointment,
-                    note: req.acta.attendance.note
-                }
                 });
 
                 res.json(acta);
@@ -131,6 +115,7 @@ module.exports = function(Actas) {
                 },
                 name: req.acta.title,
                 attendance: {
+                    id: req.attendace,
                     name: req.acta.attendance.name,
                     appointment: req.acta.attendance.appointment,
                     note: req.acta.attendance.note
