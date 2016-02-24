@@ -45,4 +45,4 @@ AttendanceSchema.path('note').validate(function(note) {
   return !!note;
 }, 'Note cannot be blank');
 
-mongoose.model('attendance', AttendanceSchema);
+mongoose.model('Attendance', AttendanceSchema);
