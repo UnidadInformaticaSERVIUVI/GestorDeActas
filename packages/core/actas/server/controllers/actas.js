@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
     Acta = mongoose.model('Acta'),
+    attendances = mongoose.model('Attendance'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
@@ -30,6 +31,7 @@ module.exports = function(Actas) {
          */
         create: function(req, res) {
             var acta = new Acta(req.body);
+            var attendance= new Attendance(req.body);
             acta.user = req.user;
 
             acta.save(function(err) {
@@ -47,7 +49,7 @@ module.exports = function(Actas) {
                     url: config.hostname + '/actas/' + acta._id,
                     name: acta.title,
                 });
-
+                res.json(attendance)
                 res.json(acta);
             });
         },
@@ -115,7 +117,7 @@ module.exports = function(Actas) {
                 },
                 name: req.acta.title,
                 attendance: {
-                    id: req.attendance._id,
+                    id: req.acta.attendance._id,
                     name: req.acta.attendance.name,
                     appointment: req.acta.attendance.appointment,
                     note: req.acta.attendance.note
