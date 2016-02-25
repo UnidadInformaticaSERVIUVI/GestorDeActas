@@ -21,7 +21,7 @@
        </div>
     </div>
     
-    <div class="form-group" ng-class="{ 'has-error' : submitted && actaForm.name.$invalid && actaForm.appointment.$invalid && actaForm.note.$invalid }">
+    <div class="form-group" ng-class="{ 'has-error' : submitted && (actaForm.name.$invalid || actaForm.appointment.$invalid || actaForm.note.$invalid) }">
         <label class="col-md-3 control-label" mean-token="'create-attendance'">Asistentes</label>
             <div class="col-md-9">
              <div class="row">
