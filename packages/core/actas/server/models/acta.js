@@ -68,12 +68,7 @@ ActaSchema.path('content').validate(function(content) {
 ActaSchema.statics.load = function(id, cb) {
   this.findOne({
     _id: id
-  }).populate('user', 'name username').exec(cb);
+  }).populate('user', 'name username').populate('attendance', 'name appointment note').exec(cb);
 };
 
-ActaSchema.statics.load = function(id, cb) {
-  this.findOne({
-    _id: id
-  }).populate('attendance', 'name').exec(cb);
-};
 mongoose.model('Acta', ActaSchema);

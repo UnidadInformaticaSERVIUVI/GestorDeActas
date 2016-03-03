@@ -141,7 +141,7 @@ else console.log('Deleted : ', data );
         all: function(req, res) {
             var query = req.acl.query('Acta');
 
-            query.find({}).sort('+created').populate('attendance', 'name appointment note').exec(function(err, actas) {
+            query.find({}).sort('+created').populate('attendance', 'name appointment note').populate('user', 'name username').exec(function(err, actas) {
                 if (err) {
                     return res.status(500).json({
                         error: 'Cannot list the actas'
