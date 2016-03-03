@@ -26,19 +26,19 @@
             <div class="col-md-9">
              <div class="row">
                     <div class="col-xs-4" ng-class="{ 'has-error' : submitted && actaForm.name.$invalid }">
-                        <input name="name" type="text" class="form-control" data-ng-model="attendance.name" id="name" placeholder="Nombre" required>
+                        <input name="name" type="text" class="form-control" data-ng-model="acta.attendance.name" id="name" placeholder="Nombre" required>
                      <div ng-show="submitted && actaForm.name.$invalid" class="help-block"> 
                             <p ng-show="actaForm.name.$error.required">Nombre es requerido</p>
                    </div>
                     </div>
                     <div class="col-xs-3" ng-class="{ 'has-error' : submitted && actaForm.appointment.$invalid }">
-                        <input name="appointment" type="text" class="form-control" data-ng-model="attendance.appointment" id="appointment" placeholder="Cargo" required>
+                        <input name="appointment" type="text" class="form-control" data-ng-model="acta.attendance.appointment" id="appointment" placeholder="Cargo" required>
                         <div ng-show="submitted && actaForm.appointment.$invalid" class="help-block"> 
                                 <p ng-show="actaForm.appointment.$error.required">Cargo es requerido</p>
                                 </div>
                     </div>
                     <div class="col-xs-5" ng-class="{ 'has-error' : submitted && actaForm.note.$invalid }">
-                        <input name="note" type="text" class="form-control" data-ng-model="attendance.note" id="note" placeholder="Nota" required> 
+                        <input name="note" type="text" class="form-control" data-ng-model="acta.attendance.note" id="note" placeholder="Nota" required> 
                         <div ng-show="submitted && actaForm.note.$invalid" class="help-block"> 
                                 <p ng-show="actaForm.note.$error.required">Nota es requerido</p>
                                 </div>

@@ -28,7 +28,7 @@ module.exports = function(Actas, app, auth) {
 
   app.route('/api/actas')
     .get(actas.all)
-    .post(auth.requiresLogin, hasPermissions, actas.create);
+    .post(auth.requiresLogin, hasPermissions, actas.create);    
   app.route('/api/actas/:actaId')
     .get(auth.isMongoId, actas.show)
     .put(auth.isMongoId, auth.requiresLogin, hasAuthorization, hasPermissions, actas.update)

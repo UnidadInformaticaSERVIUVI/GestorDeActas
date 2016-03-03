@@ -5,10 +5,11 @@
  */
 var mongoose = require('mongoose'),
     Acta = mongoose.model('Acta'),
-    attendances = mongoose.model('Attendance'),
+    Attendance = mongoose.model('Attendance'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
+ 
 
 module.exports = function(Actas) {
 
@@ -21,7 +22,9 @@ module.exports = function(Actas) {
                 if (err) return next(err);
                 if (!acta) return next(new Error('Failed to load acta ' + id));
                 req.acta = acta;
-                req.acta.attendance=acta.attendance
+                            console.log('*****************Viendo find.acta.by.id***************');
+              console.log(acta.attendance);
+                          console.log('********************************');
                 next();
             });
         },
@@ -30,28 +33,34 @@ module.exports = function(Actas) {
          * Create an acta
          */
         create: function(req, res) {
+            var attendance = new Attendance(req.body.attendance);
             var acta = new Acta(req.body);
-            var attendance= new Attendance(req.body);
             acta.user = req.user;
 
-            acta.save(function(err) {
-                if (err) {
-                    return res.status(500).json({
-                        error: 'Cannot save the acta'
-                    });
-                }
-
+            attendance.save(function (err, data) {
+if (err) console.log(err);
+else console.log('Saved : ', data );
+});         acta.attendance = attendance;
+            acta.save(function(err, data) {
+        
+                if (err){ 
+                  //  return res.status(500).json({
+                  //      error: 'Cannot save the acta'
+                  //  });   
+                    console.log(err);}
+                else {
                 Actas.events.publish({
                     action: 'created',
-                    user: {
+                   user: {
                         name: req.user.name
                     },
+
                     url: config.hostname + '/actas/' + acta._id,
                     name: acta.title,
-                });
-                res.json(attendance)
-                res.json(acta);
-            });
+
+                });    
+               res.json(acta);
+            }});
         },
         /**
          * Update an acta
@@ -85,7 +94,7 @@ module.exports = function(Actas) {
          */
         destroy: function(req, res) {
             var acta = req.acta;
-
+            var attendance = req.body.attendance;
 
             acta.remove(function(err) {
                 if (err) {
@@ -93,7 +102,7 @@ module.exports = function(Actas) {
                         error: 'Cannot delete the acta'
                     });
                 }
-
+                
                 Actas.events.publish({
                     action: 'deleted',
                     user: {
@@ -104,24 +113,23 @@ module.exports = function(Actas) {
 
                 res.json(acta);
             });
+               attendance.remove(function (err, data) {
+if (err) console.log(err);
+else console.log('Deleted : ', data );
+});
         },
         /**
          * Show an acta
          */
         show: function(req, res) {
-            
+           
             Actas.events.publish({
                 action: 'viewed',
                 user: {
                     name: req.user.name
                 },
                 name: req.acta.title,
-                attendance: {
-                    id: req.acta.attendance._id,
-                    name: req.acta.attendance.name,
-                    appointment: req.acta.attendance.appointment,
-                    note: req.acta.attendance.note
-                },
+             
                 url: config.hostname + '/actas/' + req.acta._id
             });
 
@@ -133,7 +141,7 @@ module.exports = function(Actas) {
         all: function(req, res) {
             var query = req.acl.query('Acta');
 
-            query.find({}).sort('+created').populate('user', 'name username').exec(function(err, actas) {
+            query.find({}).sort('+created').populate('attendance', 'name appointment note').exec(function(err, actas) {
                 if (err) {
                     return res.status(500).json({
                         error: 'Cannot list the actas'
@@ -146,3 +154,4 @@ module.exports = function(Actas) {
         }
     };
 }
+

@@ -6,7 +6,6 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
-
 /**
  * Acta Schema
  */
@@ -35,11 +34,11 @@ var ActaSchema = new Schema({
     ref: 'User',
     required: true
   },
-  attendance:
-    {
-    type:Array
-    }
- ,
+  attendance: [
+      {
+    type: Schema.Types.ObjectId,
+    ref: 'Attendance',
+    required: true}],
   permissions: {
     type: Array
   },
@@ -72,4 +71,9 @@ ActaSchema.statics.load = function(id, cb) {
   }).populate('user', 'name username').exec(cb);
 };
 
+ActaSchema.statics.load = function(id, cb) {
+  this.findOne({
+    _id: id
+  }).populate('attendance', 'name').exec(cb);
+};
 mongoose.model('Acta', ActaSchema);

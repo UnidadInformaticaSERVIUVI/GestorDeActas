@@ -30,9 +30,9 @@
                                     <th>Nota</th>
                                 </tr>
                             </thead>
-                            <tbody data-ng-repeat="attendance in acta.attendance">
+                            <tbody ng-repeat="attendance in acta.attendance">
                                 <tr>
-                                    <td>{{attendance.id}}</td>
+                                    <td>{{attendance._id}}</td>
                                     <td>{{attendance.name}}</td>
                                     <td>{{attendance.appointment}}</td>
                                     <td>{{attendance.note}}</td>

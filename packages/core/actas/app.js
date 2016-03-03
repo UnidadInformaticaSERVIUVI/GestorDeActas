@@ -6,7 +6,6 @@
 var Module = require('meanio').Module;
 
 var Actas = new Module('actas');
-
 /*
  * All MEAN packages require registration
  * Dependency injection is used to define required modules

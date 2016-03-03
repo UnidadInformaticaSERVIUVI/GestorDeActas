@@ -8,6 +8,7 @@
 var expect = require('expect.js'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
+  Attendance = mongoose.model('Attendance'),
   Acta = mongoose.model('Acta');
 
 /**
@@ -15,6 +16,7 @@ var expect = require('expect.js'),
  */
 var user;
 var acta;
+var attendance;
 
 /**
  * Test Suites
@@ -30,11 +32,18 @@ describe('<Unit Test>', function() {
         password: 'password'
       });
       user.save(function() {
+        attendance = new Attendance({
+            name: 'Attendance Name',
+            appointment: 'Attendance Appointement',
+            note: 'Attendance Note',
+            acta: acta
+        });   
         acta = new Acta({
           title: 'Acta Title',
           place: 'Acta Place',
           content: 'Acta Content',
-          user: user
+          user: user,
+          attendance: attendance
         });
         done();
       });
@@ -45,7 +54,16 @@ describe('<Unit Test>', function() {
 
       it('should be able to save without problems', function(done) {
         this.timeout(10000);
-
+        
+ return attendance.save(function(err, data) {
+          expect(err).to.be(null);
+          expect(data.name).to.equal('Attendance Name');
+          expect(data.appointment).to.equal('Attendance Appointment');
+          expect(data.note).to.equal('Attendance Note');
+          expect(data.acta.length).to.not.equal(0);
+          expect(data.created.length).to.not.equal(0);
+          done();
+        });
         return acta.save(function(err, data) {
           expect(err).to.be(null);
           expect(data.title).to.equal('Acta Title');
@@ -104,6 +122,7 @@ describe('<Unit Test>', function() {
       this.timeout(10000);
       acta.remove(function() {
         user.remove(done);
+        attendance.remove();
       });
     });
   });

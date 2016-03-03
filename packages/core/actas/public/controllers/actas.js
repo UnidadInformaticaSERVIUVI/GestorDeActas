@@ -29,6 +29,7 @@ angular.module('mean.actas').controller('ActasController', ['$scope', '$statePar
 
     $scope.create = function(isValid) {
       if (isValid) {
+
         // $scope.acta.permissions.push('test test');
         var acta = new Actas($scope.acta);
 
