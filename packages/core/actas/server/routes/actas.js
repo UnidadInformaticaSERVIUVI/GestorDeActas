@@ -34,6 +34,8 @@ module.exports = function(Actas, app, auth) {
     .put(auth.isMongoId, auth.requiresLogin, hasAuthorization, hasPermissions, actas.update)
     .delete(auth.isMongoId, auth.requiresLogin, hasAuthorization, hasPermissions, actas.destroy);
 
-  // Finish with setting up the actaId param
+
+
+ // Finish with setting up the actaId param
   app.param('actaId', actas.acta);
 };

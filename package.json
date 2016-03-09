@@ -20,10 +20,11 @@
     "postinstall": "node tools/scripts/postinstall.js"
   },
   "dependencies": {
+    "angular-xslt": "^0.2.1",
     "assetmanager": "latest",
     "async": "latest",
-    "bower": "latest",
     "body-parser": "latest",
+    "bower": "latest",
     "compression": "latest",
     "connect-flash": "latest",
     "connect-modrewrite": "latest",

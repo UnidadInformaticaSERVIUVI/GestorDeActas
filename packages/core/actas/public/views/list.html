@@ -12,6 +12,16 @@
           <a class="btn" data-ng-click="remove(acta);">
             <i class="glyphicon glyphicon-trash"></i>
           </a>
+          
+           <a class="btn" data-ng-click="print(acta);">
+            <i class="glyphicon glyphicon-print"></i>
+          </a>
+          
+           <a class="btn" data-ng-click="download(acta);">
+            <i class="glyphicon glyphicon-download"></i>
+          </a>
+                   
+          
         </span>
       </h2>
       <div><h4>{{acta.place}}</h4></div>
@@ -21,4 +31,7 @@
     </li>
   </ul>
   <h1 data-ng-hide="!actas || actas.length">No actas yet. <br> Why don't you <a href="/actas/create">Create One</a>?</h1>
+  
+
+  
 </section>

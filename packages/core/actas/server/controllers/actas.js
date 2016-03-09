@@ -151,6 +151,14 @@ else console.log('Deleted : ', data );
                 res.json(actas)
             });
 
+        },
+        
+        downloadPDF: function (req,res) {
+            console.log("*********Descargar********");
+        },
+        
+        print: function (req,res) {
+            console.log("*********IMPRIMIR********");
         }
     };
 }

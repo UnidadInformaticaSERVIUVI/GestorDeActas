@@ -90,5 +90,24 @@ angular.module('mean.actas').controller('ActasController', ['$scope', '$statePar
         $scope.acta = acta;
       });
     };
+    
+    
+    $scope.print = function() {
+      alert("print");
+      var myWindow = window.open('', '', 'width=800, height=600');
+    myWindow.document.write("Hola");
+    myWindow.print();
+    };
+    
+    
+    $scope.download = function(acta){
+      alert("DONWLOAD");
+        acta.$download(function(response) {
+         
+          $location.path('actas');
+        });
+     
+    };
+    
   }
 ]);
