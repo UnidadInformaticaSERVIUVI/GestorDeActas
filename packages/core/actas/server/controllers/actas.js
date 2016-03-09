@@ -22,9 +22,6 @@ module.exports = function(Actas) {
                 if (err) return next(err);
                 if (!acta) return next(new Error('Failed to load acta ' + id));
                 req.acta = acta;
-                            console.log('*****************Viendo find.acta.by.id***************');
-              console.log(acta.attendance);
-                          console.log('********************************');
                 next();
             });
         },
@@ -33,35 +30,55 @@ module.exports = function(Actas) {
          * Create an acta
          */
         create: function(req, res) {
-            var attendance = new Attendance(req.body.attendance);
-            var acta = new Acta(req.body);
-            acta.user = req.user;
+                //var attendance = new Attendance(req.body.attendance);
+                var acta = new Acta(req.body);
+                acta.user = req.user;
+                var ArrayNewAttendance=[];       
+              var ArrayAttendance= req.body.attendance;
+              
+              for(var i=0; i < ArrayAttendance.length ;i++){
+                var attendance = new Attendance(ArrayAttendance[i]);
+                attendance.save(function (err) {
+                    if(err)
+                    console.log('ERROR');
+                    else
+                    console.log('Saved');
+                         
+                });
+                
+                
+                ArrayNewAttendance=ArrayNewAttendance.concat(attendance);
+              }
 
-            attendance.save(function (err, data) {
-if (err) console.log(err);
-else console.log('Saved : ', data );
-});         acta.attendance = attendance;
-            acta.save(function(err, data) {
-        
-                if (err){ 
-                  //  return res.status(500).json({
-                  //      error: 'Cannot save the acta'
-                  //  });   
-                    console.log(err);}
-                else {
-                Actas.events.publish({
-                    action: 'created',
-                   user: {
-                        name: req.user.name
-                    },
+                acta.attendance = ArrayNewAttendance;
+                
+                acta.save(function(err, data) {
+            
+                    if (err){ 
+                    //  return res.status(500).json({
+                    //      error: 'Cannot save the acta'
+                    //  });   
+                        console.log("ERROR Acta::: "+err);}
+                    else {
+                        
+                        Actas.events.publish({
+                        action: 'created',
+                        user: {
+                            name: req.user.name
+                        },
 
-                    url: config.hostname + '/actas/' + acta._id,
-                    name: acta.title,
+                        url: config.hostname + '/actas/' + acta._id,
+                        name: acta.title,
 
-                });    
-               res.json(acta);
-            }});
+                        });    
+                        
+                        res.json(acta);
+                    }
+                });
         },
+        
+        
+        
         /**
          * Update an acta
          */
@@ -163,3 +180,20 @@ else console.log('Deleted : ', data );
     };
 }
 
+/*
+           var total = req.body.attendance.length, 
+                result = [];
+                
+
+function saveAll() {
+                    var attendance = req.body.attendance.pop();
+                    attendance.save(function(err,saved) {
+                        if (err) throw err;
+                        result.push(saved[0]);
+                        if(--total) saveAll();
+                        else; // all saved here
+                        
+                    })
+                    
+                }
+                saveAll;*/

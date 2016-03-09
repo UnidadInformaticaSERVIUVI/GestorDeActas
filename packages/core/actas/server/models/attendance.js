@@ -14,17 +14,17 @@ var AttendanceSchema = new Schema({
     
   name: {
     type: String,
-    required: true,
+    required: false,
     trim: true
   },
    appointment: {
     type: String,
-    required: true,
+    required: false,
     trim: true
   },
    note: {
     type: String,
-    required: true,
+    required: false,
     trim: true
   }
 });

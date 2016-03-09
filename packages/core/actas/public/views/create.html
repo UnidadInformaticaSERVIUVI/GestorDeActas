@@ -1,5 +1,5 @@
 <section data-ng-controller="ActasController">
-  <form name="actaForm" class="form-horizontal col-md-6" role="form" data-ng-submit="create(actaForm.$valid)" novalidate>
+  <form name="actaForm" class="form-horizontal col-md-6" role="form" novalidate>
     
     <div class="form-group" ng-class="{ 'has-error' : submitted && actaForm.title.$invalid }">
       <label mean-token="'create-title'" class="col-md-3 control-label">Titulo</label>
@@ -24,31 +24,56 @@
     <div class="form-group" ng-class="{ 'has-error' : submitted && (actaForm.name.$invalid || actaForm.appointment.$invalid || actaForm.note.$invalid) }">
         <label class="col-md-3 control-label" mean-token="'create-attendance'">Asistentes</label>
             <div class="col-md-9">
-             <div class="row">
+             <div class="row" ng-repeat="attendance in acta.attendance"> 
                     <div class="col-xs-4" ng-class="{ 'has-error' : submitted && actaForm.name.$invalid }">
-                        <input name="name" type="text" class="form-control" data-ng-model="acta.attendance.name" id="name" placeholder="Nombre" required>
+                        <input name="name" type="text" class="form-control" data-ng-model="attendance.name" id="name" placeholder="Nombre" required>
                      <div ng-show="submitted && actaForm.name.$invalid" class="help-block"> 
                             <p ng-show="actaForm.name.$error.required">Nombre es requerido</p>
                    </div>
                     </div>
                     <div class="col-xs-3" ng-class="{ 'has-error' : submitted && actaForm.appointment.$invalid }">
-                        <input name="appointment" type="text" class="form-control" data-ng-model="acta.attendance.appointment" id="appointment" placeholder="Cargo" required>
+                        <input name="appointment" type="text" class="form-control" data-ng-model="attendance.appointment" id="appointment" placeholder="Cargo" required>
                         <div ng-show="submitted && actaForm.appointment.$invalid" class="help-block"> 
                                 <p ng-show="actaForm.appointment.$error.required">Cargo es requerido</p>
                                 </div>
                     </div>
                     <div class="col-xs-5" ng-class="{ 'has-error' : submitted && actaForm.note.$invalid }">
-                        <input name="note" type="text" class="form-control" data-ng-model="acta.attendance.note" id="note" placeholder="Nota" required> 
+                        <input name="note" type="text" class="form-control" data-ng-model="attendance.note" id="note" placeholder="Nota" required> 
                         <div ng-show="submitted && actaForm.note.$invalid" class="help-block"> 
                                 <p ng-show="actaForm.note.$error.required">Nota es requerido</p>
                                 </div>
                    </div>
+                   
+
                    <div ng-show="submitted && actaForm.name.$invalid && actaForm.appointment.$invalid && actaForm.note.$invalid " class="help-block">
           <p ng-show="actaForm.name.$invalid.required && actaForm.appointment.$invalid.required && actaForm.note.$invalid.required ">Nombre, cargo y nota es requerido</p>
             </div>
-             
          </div>
-         <div col-xs-5 style="float: right; margin-top: 10px;"><td><button class="btn btn-primary" ng-click="addContact()">Añadir</button></td></div>
+                       <div col-xs-5 style="float: right; margin-top: 10px;"><td><button class="btn btn-primary" ng-click="addItem()">Añadir</button></td></div>
+         
+      <!--  <table class="table">
+        <tr>
+            
+            <th>Nombre</th>
+            <th>Cargo</th>
+            <th>Nota</th>
+            <th></th>
+        </tr>
+        <tr ng:repeat="item in acta.attendance">
+            <td><input type="text" ng:model="item.name"class="input-small"></td>           
+            <td><input type="text" ng:model="item.appointment" ng:required class="input-mini"></td>
+            <td><input type="text" ng:model="item.note" ng:required class="input-mini"></td>
+              <td>
+               [<a href ng:click="removeItem($index)">X</a>]
+            </td>
+        </tr>
+        <tr>
+            <td><a href ng:click="addItem()" class="btn btn-small">add item</a></td>
+            <td></td>
+            
+        </tr> 
+    </table>-->
+         
     </div>
     </div> 
     
@@ -83,7 +108,7 @@
 
     <div class="form-group">
       <div class="col-md-offset-3 col-md-9">
-        <button mean-token="'create-submit'" type="submit" class="btn btn-info">Crear</button>
+        <button mean-token="'create-submit'" type="submit" class="btn btn-info" ng-click="create(actaForm.$valid)" >Crear</button>
       </div>
     </div>
   </form>

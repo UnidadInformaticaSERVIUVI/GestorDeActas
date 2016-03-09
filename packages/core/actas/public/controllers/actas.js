@@ -4,6 +4,13 @@ angular.module('mean.actas').controller('ActasController', ['$scope', '$statePar
   function($scope, $stateParams, $location, Global, Actas, MeanUser, Circles) {
     $scope.global = Global;
 
+ $scope.acta = {};
+ $scope.acta.attendance = [{
+     name:'',
+     appointment:'',
+     note:''
+ }];
+ 
     $scope.hasAuthorization = function(acta) {
       if (!acta || !acta.user) return false;
       return MeanUser.isAdmin || acta.user._id === MeanUser.user._id;
@@ -27,12 +34,24 @@ angular.module('mean.actas').controller('ActasController', ['$scope', '$statePar
         $scope.descendants = [];
     };
 
+    $scope.addItem = function() {
+        alert('Insertando');
+        $scope.acta.attendance.push({
+            name: '',
+            appointment: '',
+            note: ''
+        });
+        
+        
+    };
+    
     $scope.create = function(isValid) {
+        
       if (isValid) {
 
         // $scope.acta.permissions.push('test test');
         var acta = new Actas($scope.acta);
-
+          
         acta.$save(function(response) {
           $location.path('actas/' + response._id);
         });
@@ -44,6 +63,7 @@ angular.module('mean.actas').controller('ActasController', ['$scope', '$statePar
       }
     };
 
+   
     $scope.remove = function(acta) {
       if (acta) {
         acta.$remove(function(response) {

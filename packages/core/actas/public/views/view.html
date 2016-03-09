@@ -1,7 +1,8 @@
-<div class="col-xs-12">
+<div class="container-fluid">
+<div class="span12">
 <section data-ng-controller="ActasController" data-ng-init="findOne()">
-    <div class="col-xs-12">
-        <div class="col-xs-12 col-md-8"> 
+    <div class="span12" >
+        <div class="span8"> 
                     <div data-ng-if="hasAuthorization(acta)" style="float: left;">
                         <a class="btn" href="/actas/{{acta._id}}/edit">
                         <i class="glyphicon glyphicon-edit"></i>
@@ -11,20 +12,18 @@
                         </a>
                     </div>
          </div>
-        <div class="col-xs-6 col-md-4" style="text-align: right"><span>{{acta.created | date:'medium'}}</span> /
-  <span>{{acta.user.name}}</span>
+        <div class="span4" style="text-align: right"><span>{{acta.created|date:'medium'}}</span> / <span>{{acta.user.name}}</span>
         </div>  
     </div>  
-        <div class="col-xs-12" style="text-align: center">
+        <div class="span12" style="text-align: center">
         <h2>{{acta.title}}</h2>
     </div>
-    <div class="col-xs-12"><h4>Lugar: {{ acta.place }}</h4></div>
-    <div class="col-xs-12">  
-    <div class="table-responsive table-condensed">
+    <div class="span12"><h4><label>Lugar:</label> {{ acta.place }}</h4></div>
+    <div class="table-responsive">  
+    <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
                                     <th>Nombre</th>
                                     <th>Cargo</th>
                                     <th>Nota</th>
@@ -32,7 +31,6 @@
                             </thead>
                             <tbody ng-repeat="attendance in acta.attendance">
                                 <tr>
-                                    <td>{{attendance._id}}</td>
                                     <td>{{attendance.name}}</td>
                                     <td>{{attendance.appointment}}</td>
                                     <td>{{attendance.note}}</td>
@@ -41,6 +39,7 @@
                         </table>
      </div>
      </div>
- <div class="col-xs-12">{{acta.content}}</div> 
+ <div class="span12"><h4><label>Notas:</label> {{acta.content}}</h4></div> 
 </section>
+</div>
 </div>
