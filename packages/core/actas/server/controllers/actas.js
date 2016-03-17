@@ -35,6 +35,7 @@ module.exports = function(Actas) {
                 acta.user = req.user;
                 var ArrayNewAttendance=[];       
               var ArrayAttendance= req.body.attendance;
+              var ArrayCommitment=req.body.commitment;
               
               for(var i=0; i < ArrayAttendance.length ;i++){
                 var attendance = new Attendance(ArrayAttendance[i]);
@@ -49,6 +50,8 @@ module.exports = function(Actas) {
                 
                 ArrayNewAttendance=ArrayNewAttendance.concat(attendance);
               }
+              
+              ArrayNewAttendance.find({ name : 'Pedro'}, callback);
 
                 acta.attendance = ArrayNewAttendance;
                 
