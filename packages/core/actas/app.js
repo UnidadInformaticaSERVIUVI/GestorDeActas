@@ -16,6 +16,7 @@ Actas.register(function(app, auth, database, circles, swagger) {
   Actas.routes(app, auth, database);
 
   Actas.aggregateAsset('css', 'actas.css');
+  Actas.angularDependencies(['ngMaterial']);
 
   
   //We are adding a link to the main menu for all authenticated users
