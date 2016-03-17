@@ -11,6 +11,14 @@ angular.module('mean.actas').controller('ActasController', ['$scope', '$statePar
      note:''
  }];
  
+ $scope.acta.commitment = [{
+     deadline:'',
+     attendance:'',
+     description:''
+ }];
+
+
+ 
     $scope.hasAuthorization = function(acta) {
       if (!acta || !acta.user) return false;
       return MeanUser.isAdmin || acta.user._id === MeanUser.user._id;
@@ -35,7 +43,6 @@ angular.module('mean.actas').controller('ActasController', ['$scope', '$statePar
     };
 
     $scope.addItem = function() {
-        alert('Insertando');
         $scope.acta.attendance.push({
             name: '',
             appointment: '',
@@ -46,7 +53,7 @@ angular.module('mean.actas').controller('ActasController', ['$scope', '$statePar
     };
     
     $scope.create = function(isValid) {
-        
+      alert(angular.toJson($scope.acta));
       if (isValid) {
 
         // $scope.acta.permissions.push('test test');
