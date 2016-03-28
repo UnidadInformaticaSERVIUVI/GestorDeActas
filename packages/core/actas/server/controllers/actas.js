@@ -42,6 +42,7 @@ module.exports = function(Actas) {
          */
         create: function(req, res) {
                 //var attendance = new Attendance(req.body.attendance);
+                console.log(req.body);
                 var acta = new Acta(req.body);
                 acta.user = req.user;
                 var ArrayNewAttendance=[];       
@@ -76,12 +77,12 @@ module.exports = function(Actas) {
                       
                       for (var i=0; i < ArrayNewAttendance.length; i++){
                       
-                      if (ArrayNewAttendance[i].name !== ArrayNewCommitment[h].attendance ) {
+                      if (ArrayNewAttendance[i].name !== ArrayNewCommitment[h].committed ) {
                         
                       }else{
                       
                       //se le entrega el id del objeto attendance a el objeto commitment.attendnace_id
-                      commitment.attendance_id=ArrayNewAttendance[i]._id;
+                      commitment.attendance=ArrayNewAttendance[i]._id;
                                             
                       //A continuación se guarda commitment
                       commitment.save(function (err) {
@@ -222,7 +223,6 @@ else console.log('Deleted : ', data );
     var Commitment = mongoose.model('Commitment', Commitment);
  
       //var query = req.acl.query('commitments');
-        
           
           Commitment.find({}).sort('-created').populate('name').exec(function(err, commitments) {
               console.log(commitments);

@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
  */
 var CommitmentSchema = new Schema({
    
-  attendance_id: {
+  attendance: {
     type: Schema.ObjectId,
     ref: 'Attendance',
     required: false
@@ -22,7 +22,7 @@ var CommitmentSchema = new Schema({
     type: Date,
     required: false,
   },
-   attendance: {
+   committed: {
     type: String,
     required: false,
     trim: true

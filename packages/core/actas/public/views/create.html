@@ -1,6 +1,6 @@
 <section data-ng-controller="ActasController">
     
-  <form name="actaForm" class="form-horizontal col-md-9" role="form" novalidate>
+  <form name="actaForm" class="form-horizontal col-md-9" autocomplete="off" role="form" novalidate>
     
     <div class="form-group" ng-class="{ 'has-error' : submitted && actaForm.title.$invalid }">
       <label mean-token="'create-title'" class="col-md-3 control-label">Titulo</label>
@@ -55,7 +55,7 @@
     </div>
     </div>
     <!-- -->
-    <div class="form-group" ng-class="{ 'has-error' : submitted && (actaForm.deadline.$invalid || actaForm.attendance.$invalid || actaForm.description.$invalid) }">
+    <div class="form-group" ng-class="{ 'has-error' : submitted && (actaForm.deadline.$invalid || actaForm.committed.$invalid || actaForm.description.$invalid) }">
         <label class="col-md-3 control-label" mean-token="'create-commitment'">Compromisos</label>
             <div class="col-md-9">
              <div class="row" ng-repeat="commitment in acta.commitment"> 
@@ -66,13 +66,13 @@
                         </div>
                     </div>
                     
-                    <div class="col-xs-3" ng-class="{ 'has-error' : submitted && actaForm.attendance.$invalid }">
+                    <div class="col-xs-3" ng-class="{ 'has-error' : submitted && actaForm.committed.$invalid }">
                         
-                        <select class="form-control" name="attendance" id="attendance" ng-model="commitment.attendance" required>
+                        <select class="form-control" name="committed" id="committed" ng-model="commitment.committed" required>
             <option ng-repeat="attendance in acta.attendance" ng-value="{{attendance.name}}">{{attendance.name}}</option>
     </select>
-                        <div ng-show="submitted && actaForm.attendance.$invalid" class="help-block"> 
-                                <p ng-show="actaForm.attendance.$error.required">Asistente es requerido</p>
+                        <div ng-show="submitted && actaForm.committed.$invalid" class="help-block"> 
+                                <p ng-show="actaForm.committed.$error.required">Asistente es requerido</p>
                                 </div>
                     </div>
                     
@@ -84,8 +84,8 @@
                    </div>
                    
 
-                   <div ng-show="submitted && actaForm.deadline.$invalid && actaForm.attendance.$invalid && actaForm.description.$invalid " class="help-block">
-          <p ng-show="actaForm.deadline.$invalid.required && actaForm.attendance.$invalid.required && actaForm.description.$invalid.required ">Fecha limite, asistente y compromiso es requerido</p>
+                   <div ng-show="submitted && actaForm.deadline.$invalid && actaForm.committed.$invalid && actaForm.description.$invalid " class="help-block">
+          <p ng-show="actaForm.deadline.$invalid.required && actaForm.committed.$invalid.required && actaForm.description.$invalid.required ">Fecha limite, asistente y compromiso es requerido</p>
             </div>
          </div>
                        <div col-xs-5 style="float: right;"><td><button class="btn btn-primary" ng-click="addCommit()">Añadir</button></td></div>

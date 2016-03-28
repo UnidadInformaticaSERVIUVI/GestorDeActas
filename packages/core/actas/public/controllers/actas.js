@@ -13,7 +13,7 @@ angular.module('mean.actas').controller('ActasController', ['$scope', '$statePar
  
  $scope.acta.commitment = [{
      deadline:'',
-     attendance:'',
+     committed:'',
      description:''
  }];
 
@@ -53,7 +53,7 @@ angular.module('mean.actas').controller('ActasController', ['$scope', '$statePar
     $scope.addCommit = function() {
         $scope.acta.commitment.push({
             deadline: '',
-            attendance: '',
+            committed: '',
             description: ''
         });
     };
