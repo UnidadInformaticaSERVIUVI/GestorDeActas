@@ -30,7 +30,11 @@ Actas.register(function(app, auth, database, circles, swagger) {
     'title': 'Crear Acta',
     'link': 'create acta'
   });
-
+   Actas.menus.add({
+    'roles': ['authenticated'],
+    'title': 'Compromisos',
+    'link': 'commitments'
+  });
   Actas.events.defaultData({
     type: 'post',
     subtype: 'acta'

@@ -17,6 +17,20 @@ exports.load = function(swagger, parms) {
       params: searchParms
     }
   };
+  
+  var see={
+    'spec': {
+      description: 'Commitment operations',
+      path: '/compromisos',
+      method: 'GET',
+      summary: 'Get all Commitments',
+      notes: '',
+      type: 'Commitment',
+      nickname: 'getCommitments',
+      produces: ['application/json'],
+      params: searchParms
+    }
+  };
 
   var create = {
     'spec': {
@@ -40,6 +54,7 @@ exports.load = function(swagger, parms) {
   };
 
   swagger.addGet(list)
+  swagger.addGet(see)
     .addPost(create);
 
 };

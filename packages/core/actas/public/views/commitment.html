@@ -1,0 +1,13 @@
+<section data-ng-controller="ActasController" data-ng-init="findCommitments()">
+  <ul class="commitments unstyled">
+    <li data-ng-repeat="commitment in commitments">
+        <h3>{{commitment.attendance}}</h3>
+        <h4>{{commitment.deadline | date:'fullDate'}}</h4>
+        <div id="item">{{commitment.description}} </div>
+    </br>
+    </li>
+  </ul>
+  <h1 data-ng-hide="!commitments || commitments.length">No actas yet. <br> Why don't you <a href="/actas/create">Create One</a>?</h1>
+  
+  
+</section>

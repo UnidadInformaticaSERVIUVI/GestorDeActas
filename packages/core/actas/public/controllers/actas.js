@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.actas').controller('ActasController', ['$scope', '$stateParams', '$location', 'Global', 'Actas', 'MeanUser', 'Circles',
-  function($scope, $stateParams, $location, Global, Actas, MeanUser, Circles) {
+angular.module('mean.actas').controller('ActasController', ['$scope', '$stateParams', '$location', 'Global', 'Actas', 'MeanUser', 'Circles','Commitments',
+  function($scope, $stateParams, $location, Global, Actas, MeanUser, Circles, Commitments) {
     $scope.global = Global;
 
  $scope.acta = {};
@@ -48,10 +48,15 @@ angular.module('mean.actas').controller('ActasController', ['$scope', '$statePar
             appointment: '',
             note: ''
         });
-        
-        
     };
     
+    $scope.addCommit = function() {
+        $scope.acta.commitment.push({
+            deadline: '',
+            attendance: '',
+            description: ''
+        });
+    };
     $scope.create = function(isValid) {
       alert(angular.toJson($scope.acta));
       if (isValid) {
@@ -108,6 +113,15 @@ angular.module('mean.actas').controller('ActasController', ['$scope', '$statePar
       Actas.query(function(actas) {
         $scope.actas = actas;
       });
+    };
+    
+    $scope.findCommitments = function() {
+        
+      Commitments.query(function(commitments) {
+        $scope.commitments = commitments;//[{x:"s",y:"d"},{x:"r", y:"e"}];
+      
+      });
+  
     };
 
     $scope.findOne = function() {

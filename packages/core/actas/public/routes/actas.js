@@ -14,6 +14,14 @@ angular.module('mean.actas').config(['$stateProvider',
           denyState: 'auth.login'
         }
       })
+       .state('commitments', {
+        url: '/compromisos',
+        templateUrl: '/actas/views/commitment.html',
+        requiredCircles : {
+          circles: ['authenticated'],
+          denyState: 'auth.login'
+        }
+      })
       .state('create acta', {
         url: '/actas/create',
         templateUrl: '/actas/views/create.html',

@@ -18,5 +18,24 @@ exports.models = {
         description: 'Permissions for viewing the acta'
       }
     }
+  },
+  Commitment: {
+    id: 'Commitment',
+    required: ['content', 'title'],
+    properties: {
+   
+      deadline: {
+        type: 'Date',
+        description: 'Title of the acta'
+      },
+      attendance: {
+        type: 'string',
+        description: 'content of the acta'
+      },
+      description: {
+        type: 'string',
+        description: 'Permissions for viewing the acta'
+      }
+    }
   }
 };

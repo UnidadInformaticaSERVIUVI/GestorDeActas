@@ -38,7 +38,7 @@ var ActaSchema = new Schema({
       {
     type: Schema.Types.ObjectId,
     ref: 'Attendance',
-    required: true}],
+    required: true}],   
   permissions: {
     type: Array
   },

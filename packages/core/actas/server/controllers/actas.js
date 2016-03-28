@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
     Acta = mongoose.model('Acta'),
     Attendance = mongoose.model('Attendance'),
+    Commitment = mongoose.model('Commitment'),
     config = require('meanio').loadConfig(),
     _ = require('lodash');
 
@@ -25,6 +26,16 @@ module.exports = function(Actas) {
                 next();
             });
         },
+         commitment: function(req, res, next, id) {
+            Commitment.load(id, function(err, commitment) {
+                if (err) return next(err);
+                if (!commitment) return next(new Error('Failed to load commitment ' + id));
+                req.commitment = commitment;
+                next();
+            });
+        },
+        
+       
         
         /**
          * Create an acta
@@ -35,7 +46,9 @@ module.exports = function(Actas) {
                 acta.user = req.user;
                 var ArrayNewAttendance=[];       
               var ArrayAttendance= req.body.attendance;
+              
               var ArrayCommitment=req.body.commitment;
+              var ArrayNewCommitment=[];
               
               for(var i=0; i < ArrayAttendance.length ;i++){
                 var attendance = new Attendance(ArrayAttendance[i]);
@@ -50,9 +63,39 @@ module.exports = function(Actas) {
                 
                 ArrayNewAttendance=ArrayNewAttendance.concat(attendance);
               }
+              //Aqui se empieza a crear commitment, el que se guardan todos los commitments en un array
               
-              ArrayNewAttendance.find({ name : 'Pedro'}, callback);
-
+              for( i=0; i < ArrayCommitment.length ; i++){
+         
+         var commitment = new Commitment(ArrayCommitment[i]);
+         
+                  ArrayNewCommitment=ArrayNewCommitment.concat(commitment);
+                   };
+                   
+                   for (var h=0; h < ArrayNewCommitment.length; h++){
+                      
+                      for (var i=0; i < ArrayNewAttendance.length; i++){
+                      
+                      if (ArrayNewAttendance[i].name !== ArrayNewCommitment[h].attendance ) {
+                        
+                      }else{
+                      
+                      //se le entrega el id del objeto attendance a el objeto commitment.attendnace_id
+                      commitment.attendance_id=ArrayNewAttendance[i]._id;
+                                            
+                      //A continuación se guarda commitment
+                      commitment.save(function (err) {
+                    if(err)
+                    console.log('ERROR');
+                    else
+                    console.log('Saved commitment');
+                         
+                });
+                          
+                  }};
+                                                
+                  };
+                   
                 acta.attendance = ArrayNewAttendance;
                 
                 acta.save(function(err, data) {
@@ -155,6 +198,7 @@ else console.log('Deleted : ', data );
 
             res.json(req.acta);
         },
+        
         /**
          * List of Actas
          */
@@ -173,6 +217,27 @@ else console.log('Deleted : ', data );
 
         },
         
+       allcommitment: function(req, res){
+            
+    var Commitment = mongoose.model('Commitment', Commitment);
+ 
+      //var query = req.acl.query('commitments');
+        
+          
+          Commitment.find({}).sort('-created').populate('name').exec(function(err, commitments) {
+              console.log(commitments);
+          
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Cannot list the commitments'
+                    });
+                }
+
+                res.json(commitments)
+            });
+            
+        },
+        
         downloadPDF: function (req,res) {
             console.log("*********Descargar********");
         },
@@ -183,20 +248,47 @@ else console.log('Deleted : ', data );
     };
 }
 
-/*
-           var total = req.body.attendance.length, 
-                result = [];
-                
-
-function saveAll() {
-                    var attendance = req.body.attendance.pop();
-                    attendance.save(function(err,saved) {
-                        if (err) throw err;
-                        result.push(saved[0]);
-                        if(--total) saveAll();
-                        else; // all saved here
-                        
-                    })
-                    
+/*module.exports = function(Commitments) {
+    return {
+        
+         commitments: function(req, res, next, id) {
+            Commitment.load(id, function(err, commitment) {
+                if (err) return next(err);
+                if (!commitment) return next(new Error('Failed to load commitment ' + id));
+                req.commitment = commitment;
+                next();
+            });
+        },
+         allcommitment: function(req, res){
+          var query = req.acl.query('Commitment');
+          
+          query.find({}).sort('+created').populate('attendance', 'name ').exec(function(err, commitments) {
+                if (err) {
+                    return res.status(500).json({
+                        error: 'Cannot list the commitments'
+                    });
                 }
-                saveAll;*/
+
+                res.json(commitments)
+            });
+        },
+         
+         * Show an commitment
+         
+        show: function(req, res) {
+           
+            Commitments.events.publish({
+                action: 'viewed',
+                user: {
+                    name: req.commitment.attendance
+                },
+                deadline: req.commitment.deadline,
+             
+                url: config.hostname + '/commitments/' + req.commitment._id
+            });
+
+            res.json(req.commitment);
+        },
+        
+    };
+}*/
