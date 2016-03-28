@@ -1,4 +1,0 @@
-# GestorDeActas
-
-NVALDES--MODIFICADO
-
